@@ -5,11 +5,11 @@ error_reporting(E_ALL);
 
 require_once('vendor/autoload.php');
 
-use \OpenPaymentSolutions\TranzWarePaymentGateway\TranzWarePaymentGatewayRequestFactory;
-use \OpenPaymentSolutions\TranzWarePaymentGateway\CurrencyCodes;
-use \OpenPaymentSolutions\TranzWarePaymentGateway\OrderTypes;
+use \Codio\PaymentGateway\PaymentGatewayRequestFactory;
+use \Codio\PaymentGateway\CurrencyCodes;
+use \Codio\PaymentGateway\OrderTypes;
 
-$requestFactory = new TranzWarePaymentGatewayRequestFactory(
+$requestFactory = new PaymentGatewayRequestFactory(
     'https://tranz-ware-payment-gateway/url',
     'E1000010',
     'https://your-site-address-here/samples/order_approved.php',
@@ -24,11 +24,9 @@ $requestFactory
     ->setCertificate($certFile, $keyFile, $keyPass)
     ->disableSSLVerification() // for dev environment or if no need to validate SSL host
     ->setDebugFile(__DIR__.'/debug.log');
-
 $orderRequest = $requestFactory->createOrderRequest(1, CurrencyCodes::USD, 'TEST PAYMENT $0.01', OrderTypes::PURCHASE);
 /**
- * or shorthands:
- * $orderRequest = $requestFactory->createOrderRequest(1, CurrencyCodes::USD, 'TEST PAYMENT $0.01');
+ * or shorthand:
  * $orderRequest = $requestFactory->createPurchaseOrderRequest(1, CurrencyCodes::USD, 'TEST PAYMENT $0.01');
  */
 $orderRequestResult = $orderRequest->execute();

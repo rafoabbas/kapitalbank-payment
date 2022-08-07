@@ -1,19 +1,18 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Interface TranzWarePaymentGatewayRequestInterface
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Interface PaymentGatewayRequestInterface
+ * @package Codio\PaymentGateway\Requests
  */
-interface TranzWarePaymentGatewayRequestInterface
+interface PaymentGatewayRequestInterface
 {
     /**
      * Executes request and returns instance of
-     * class that implements TranzWarePaymentGatewayRequestResultInterface
+     * class that implements PaymentGatewayRequestResultInterface
      *
-     * @return TranzWarePaymentGatewayRequestResultInterface
+     * @return PaymentGatewayRequestResultInterface
      */
     public function execute();
 
@@ -22,8 +21,8 @@ interface TranzWarePaymentGatewayRequestInterface
      *
      * @param string $cert
      * @param string $key
-     * @param string $keyPass   (optional)
-     * @param bool   $strictSSL (optional)
+     * @param string $keyPass
+     * @param bool $strictSSL
      *
      * @return void
      */

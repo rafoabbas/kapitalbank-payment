@@ -1,24 +1,26 @@
 <?php
-
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Class TranzWarePaymentGatewayHTTPClientResult
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Class PaymentGatewayHTTPClientResult
+ * @package Codio\PaymentGateway\Requests
  */
-class TranzWarePaymentGatewayHTTPClientResult implements TranzWarePaymentGatewayHTTPClientResultInterface
+class PaymentGatewayHTTPClientResult implements PaymentGatewayHTTPClientResultInterface
 {
     private $info;
     private $output;
 
     /**
-     * TranzWarePaymentGatewayHTTPClientResult constructor.
+     * PaymentGatewayHTTPClientResult constructor.
      *
      * @param mixed $output
      * @param mixed $info
      */
-    public function __construct($output, $info)
+    public function __construct
+    (
+        $output,
+        $info
+    )
     {
         $this->info = $info;
         $this->output = $output;

@@ -1,15 +1,15 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway;
+namespace Codio\PaymentGateway;
 
-use \OpenPaymentSolutions\TranzWarePaymentGateway\Requests\TranzWarePaymentGatewayOrderRequest;
-use \OpenPaymentSolutions\TranzWarePaymentGateway\Requests\TranzWarePaymentGatewayOrderStatusRequest;
+use \Codio\PaymentGateway\Requests\PaymentGatewayOrderRequest;
+use \Codio\PaymentGateway\Requests\PaymentGatewayOrderStatusRequest;
 
 /**
  * Factory class for creation of request objects
  *
  * Example:
- *  $requestFactory = new TranzWarePaymentGatewayRequestFactory(
+ *  $requestFactory = new PaymentGatewayRequestFactory(
  *   'https://tranz-ware-payment-gateway/url',
  *   'E1000010',
  *   'https://your-site-address-here/samples/order_approved.php',
@@ -23,32 +23,32 @@ use \OpenPaymentSolutions\TranzWarePaymentGateway\Requests\TranzWarePaymentGatew
  *  $requestFactory->setCertificate($certFile, $keyFile, $keyPass);
  *  $requestFactory->disableSSLVerification();
  *
- *  $orderRequest = $requestFactory->createOrderRequest(1, 'USD', 'TEST PAYMENT #1'); // --> instance of TranzWarePaymentGatewayRequestInterface
+ *  $orderRequest = $requestFactory->createOrderRequest(1, 'USD', 'TEST PAYMENT #1'); // --> instance of PaymentGatewayRequestInterface
  *
- * Class TranzWarePaymentGatewayRequestFactory
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway
+ * Class PaymentGatewayRequestFactory
+ * @package Codio\PaymentGateway
  */
-class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRequestFactoryInterface
+class PaymentGatewayRequestFactory implements PaymentGatewayRequestFactoryInterface
 {
     /**
-     * TranzWarePaymentGatewayRequestFactory constructor.
+     * PaymentGatewayRequestFactory constructor.
      *
      * @param string $GATEWAY_URL
      * @param string $MERCHANT_ID
      * @param string $ON_ORDER_APPROVED_URL
      * @param string $ON_ORDER_DECLINED_URL
      * @param string $ON_ORDER_CANCELED_URL
-     * @param string $LANG (optional)
+     * @param string $LANG
      */
     public function __construct(
         $GATEWAY_URL, $MERCHANT_ID,
         $ON_ORDER_APPROVED_URL, $ON_ORDER_DECLINED_URL, $ON_ORDER_CANCELED_URL,
         $LANG = 'EN'
-    ) {
+    )
+    {
         $this->MERCHANT_ID = $MERCHANT_ID;
         $this->LANG = $LANG;
-        $urlProvider = new TranzWarePaymentGatewayUrls();
+        $urlProvider = new PaymentGatewayUrls();
         $urlProvider
             ->setGatewayUrl($GATEWAY_URL)
             ->setOnOrderApprovedUrl($ON_ORDER_APPROVED_URL)
@@ -62,12 +62,12 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * Setting certificate, key file, key pass (default: ''), strict mode (default: enabled)
      *
-     * @param string    $certFile  Path to certificate
-     * @param string    $keyFile   Path to private key
-     * @param string    $keyPass   (optional) Password provided in creation of private key
-     * @param bool|null $strictSSL (optional) Enables or disables SSL host verification (default: enabled)
+     * @param string $certFile  Path to certificate
+     * @param string $keyFile   Path to private key
+     * @param string $keyPass   Password provided in creation of private key
+     * @param bool|null $strictSSL Enables or disables SSL host verification (default: enabled)
      *
-     * @return TranzWarePaymentGatewayRequestFactory
+     * @return PaymentGatewayRequestFactory
      */
     final public function setCertificate($certFile, $keyFile, $keyPass = '', $strictSSL = null)
     {
@@ -89,7 +89,7 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * Disables SSL host verification
      *
-     * @return TranzWarePaymentGatewayRequestFactory
+     * @return PaymentGatewayRequestFactory
      */
     final public function disableSSLVerification()
     {
@@ -100,7 +100,7 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * Enables SSL host verification
      *
-     * @return TranzWarePaymentGatewayRequestFactory
+     * @return PaymentGatewayRequestFactory
      */
     final public function enableSSLVerification()
     {
@@ -112,26 +112,26 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     protected $LANG;
 
     /**
-     * @var TranzWarePaymentGatewayUrlProviderInterface
+     * @var PaymentGatewayUrlProviderInterface
      *
-     * Instance of TranzWarePaymentGatewayUrlProviderInterface
+     * Instance of PaymentGatewayUrlProviderInterface
      * that returns set of urls required by request instances
      */
     protected $urlProvider;
 
     /**
-     * @param TranzWarePaymentGatewayUrlProviderInterface $urlProvider
+     * @param PaymentGatewayUrlProviderInterface $urlProvider
      *
-     * @return TranzWarePaymentGatewayRequestFactory
+     * @return PaymentGatewayRequestFactory
      */
-    final private function setUrlProvider(TranzWarePaymentGatewayUrlProviderInterface $urlProvider)
+    final private function setUrlProvider(PaymentGatewayUrlProviderInterface $urlProvider)
     {
         $this->urlProvider = $urlProvider;
         return $this;
     }
 
     /**
-     * @return TranzWarePaymentGatewayUrlProviderInterface
+     * @return PaymentGatewayUrlProviderInterface
      */
     final private function getUrlProvider()
     {
@@ -143,7 +143,7 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * @param string $pathToFile
      *
-     * @return TranzWarePaymentGatewayRequestFactory
+     * @return PaymentGatewayRequestFactory
      */
     final public function setDebugFile($pathToFile)
     {
@@ -153,16 +153,16 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     }
 
     /**
-     * @param float                                              $amount
-     * @param string                                             $currency
-     * @param string                                             (optional) $description
-     * @param string{OrderTypes::PURCHASE, OrderTypes::PRE_AUTH} (optional) $orderType
+     * @param float  $amount
+     * @param string $currency
+     * @param string $description
+     * @param string{OrderTypes::PURCHASE, OrderTypes::PRE_AUTH} $orderType
      *
-     * @return TranzWarePaymentGatewayOrderRequest
+     * @return PaymentGatewayOrderRequest
      */
     final public function createOrderRequest($amount, $currency, $description = '', $orderType = OrderTypes::PURCHASE)
     {
-        $request = new TranzWarePaymentGatewayOrderRequest(
+        $request = new PaymentGatewayOrderRequest(
             $this->getUrlProvider()->getGatewayUrl(),
             $this->getUrlProvider()->getOnOrderApprovedUrl(),
             $this->getUrlProvider()->getOnOrderDeclinedUrl(),
@@ -182,9 +182,9 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * @param float  $amount
      * @param string $currency
-     * @param string $description (optional)
+     * @param string $description
      *
-     * @return TranzWarePaymentGatewayOrderRequest
+     * @return PaymentGatewayOrderRequest
      */
     final public function createOrderPreAuthRequest($amount, $currency, $description = '')
     {
@@ -194,9 +194,9 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
     /**
      * @param float  $amount
      * @param string $currency
-     * @param string $description (optional)
+     * @param string $description
      *
-     * @return TranzWarePaymentGatewayOrderRequest
+     * @return PaymentGatewayOrderRequest
      */
     final public function createOrderPurchaseRequest($amount, $currency, $description = '')
     {
@@ -207,11 +207,11 @@ class TranzWarePaymentGatewayRequestFactory implements TranzWarePaymentGatewayRe
      * @param string $orderId
      * @param string $sessionId
      *
-     * @return TranzWarePaymentGatewayOrderStatusRequest
+     * @return PaymentGatewayOrderStatusRequest
      */
     final public function createOrderStatusRequest($orderId, $sessionId)
     {
-        $request = new TranzWarePaymentGatewayOrderStatusRequest(
+        $request = new PaymentGatewayOrderStatusRequest(
             $this->getUrlProvider()->getGatewayUrl(),
             $this->MERCHANT_ID,
             $orderId,

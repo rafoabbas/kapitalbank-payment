@@ -1,13 +1,12 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Class TranzWarePaymentGatewayOrderStatusRequestResult
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Class PaymentGatewayOrderStatusRequestResult
+ * @package Codio\PaymentGateway\Requests
  */
-class TranzWarePaymentGatewayOrderStatusRequestResult implements TranzWarePaymentGatewayRequestResultInterface
+class PaymentGatewayOrderStatusRequestResult implements PaymentGatewayRequestResultInterface
 {
     private $httpStatus;
     private $responseBody;
@@ -15,11 +14,11 @@ class TranzWarePaymentGatewayOrderStatusRequestResult implements TranzWarePaymen
     private $data;
 
     /**
-     * TranzWarePaymentGatewayOrderStatusRequestResult constructor.
+     * PaymentGatewayOrderStatusRequestResult constructor.
      *
-     * @param TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult
+     * @param PaymentGatewayHTTPClientResultInterface $HTTPClientResult
      */
-    public function __construct(TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult)
+    public function __construct(PaymentGatewayHTTPClientResultInterface $HTTPClientResult)
     {
         $this->responseBody = $HTTPClientResult->getOutput();
         $info = $HTTPClientResult->getInfo();

@@ -1,13 +1,12 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Class TranzWarePaymentGatewayOrderRequestResult
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Class PaymentGatewayOrderRequestResult
+ * @package Codio\PaymentGateway\Requests
  */
-class TranzWarePaymentGatewayOrderRequestResult implements TranzWarePaymentGatewayRequestResultInterface
+class PaymentGatewayOrderRequestResult implements PaymentGatewayRequestResultInterface
 {
     private $httpStatus;
     private $responseBody;
@@ -15,11 +14,11 @@ class TranzWarePaymentGatewayOrderRequestResult implements TranzWarePaymentGatew
     private $data;
 
     /**
-     * TranzWarePaymentGatewayOrderRequestResult constructor.
+     * PaymentGatewayOrderRequestResult constructor.
      *
-     * @param TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult
+     * @param PaymentGatewayHTTPClientResultInterface $HTTPClientResult
      */
-    public function __construct(TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult)
+    public function __construct(PaymentGatewayHTTPClientResultInterface $HTTPClientResult)
     {
         $this->responseBody = $HTTPClientResult->getOutput();
         $info = $HTTPClientResult->getInfo();
@@ -49,9 +48,8 @@ class TranzWarePaymentGatewayOrderRequestResult implements TranzWarePaymentGatew
                 'URL' => $order->URL,
                 'OrderId' => $order->OrderID,
                 'SessionId' => $order->SessionID,
-                'PaymentUrl' => $order->URL . '?' .
-                                'ORDERID=' . $order->OrderID . '&' .
-                                'SESSIONID=' . $order->SessionID
+                'PaymentUrl' => $order->URL . '?' . 'ORDERID=' . $order->OrderID . '&' . 'SESSIONID=' .
+                                $order->SessionID
             ];
         }
     }

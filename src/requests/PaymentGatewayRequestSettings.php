@@ -1,9 +1,8 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
-trait TranzWarePaymentGatewayRequestSettings
-{
+trait PaymentGatewayRequestSettings {
     private $strictSSL, $sslKey, $sslKeyPass, $sslCertificate;
 
     /**
@@ -11,8 +10,8 @@ trait TranzWarePaymentGatewayRequestSettings
      *
      * @param string $cert
      * @param string $key
-     * @param string $keyPass   (optional)
-     * @param bool   $strictSSL (optional)
+     * @param string $keyPass
+     * @param bool $strictSSL
      *
      * @return void
      */

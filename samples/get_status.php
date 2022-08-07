@@ -2,9 +2,9 @@
 
 require_once('vendor/autoload.php');
 
-use \OpenPaymentSolutions\TranzWarePaymentGateway\TranzWarePaymentGatewayRequestFactory;
+use \Codio\PaymentGateway\PaymentGatewayRequestFactory;
 
-$requestFactory = new TranzWarePaymentGatewayRequestFactory(
+$requestFactory = new PaymentGatewayRequestFactory(
     'https://tranz-ware-payment-gateway/url',
     'E1000010',
     'https://your-site-address-here/samples/order_approved.php',

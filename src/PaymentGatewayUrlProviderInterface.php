@@ -1,13 +1,12 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway;
+namespace Codio\PaymentGateway;
 
 /**
- * Interface TranzWarePaymentGatewayUrlProviderInterface
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway
+ * Interface PaymentGatewayUrlProviderInterface
+ * @package Codio\PaymentGateway
  */
-interface TranzWarePaymentGatewayUrlProviderInterface
+interface PaymentGatewayUrlProviderInterface
 {
     /**
      * @param string $url

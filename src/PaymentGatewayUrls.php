@@ -1,20 +1,19 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway;
+namespace Codio\PaymentGateway;
 
 /***
  * Class for storing urls required by TWPG
  *
  * Example:
- *  $gatewayUrls = new TranzWarePaymentGatewayUrls();
+ *  $gatewayUrls = new PaymentGatewayUrls();
  *  $gatewayUrls->setGatewayUrl('https://twpg/url/here');
  *  print $gatewayUrls->getGatewayUrl(); // --> https://twpg/url/here
  *
- * Class TranzWarePaymentGatewayUrls
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway
+ * Class PaymentGatewayUrls
+ * @package Codio\PaymentGateway
  */
-class TranzWarePaymentGatewayUrls implements TranzWarePaymentGatewayUrlProviderInterface
+class PaymentGatewayUrls implements PaymentGatewayUrlProviderInterface
 {
     /**
      * @var string $GATEWAY_URL

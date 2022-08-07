@@ -2,7 +2,7 @@
 
 namespace tests;
 
-use \OpenPaymentSolutions\TranzWarePaymentGateway\OrderTypes;
+use \Codio\PaymentGateway\OrderTypes;
 
 use \PHPUnit\Framework\TestCase;
 

@@ -1,5 +1,5 @@
 {
     "require": {
-        "open-payment-solutions/tranzware-payment-gateway": "^1.2.0"
+        "codio/kapitalbank-payment": "^1.1.7"
     }
 }

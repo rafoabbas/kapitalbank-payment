@@ -1,12 +1,11 @@
 <?php
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Class TranzWarePaymentGatewayHTTPClient
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Class PaymentGatewayHTTPClient
+ * @package Codio\PaymentGateway\Requests
  */
-class TranzWarePaymentGatewayHTTPClient implements TranzWarePaymentGatewayHTTPClientInterface
+class PaymentGatewayHTTPClient implements PaymentGatewayHTTPClientInterface
 {
     protected $url;
     protected $body;
@@ -17,19 +16,21 @@ class TranzWarePaymentGatewayHTTPClient implements TranzWarePaymentGatewayHTTPCl
     protected $debugFileDescriptor;
 
     /**
-     * TranzWarePaymentGatewayHTTPClient constructor.
+     * PaymentGatewayHTTPClient constructor.
      *
      * @param string $url
-     * @param null   $body
-     * @param null   $ssl
-     * @param bool   $strictSSL
+     * @param null $body
+     * @param null $ssl
+     * @param bool $strictSSL
      */
-    public function __construct(
+    public function __construct
+    (
         $url,
         $body = null,
         $ssl = null,
         $strictSSL = true
-    ) {
+    )
+    {
         $this->url = $url;
         $this->body = $body;
         $this->ssl = $ssl;
@@ -43,20 +44,19 @@ class TranzWarePaymentGatewayHTTPClient implements TranzWarePaymentGatewayHTTPCl
      */
     final public function setDebugToFile($path_to_file)
     {
-        if (is_string($path_to_file)) {
-            $this->debug = true;
-            $this->debugToFile = $path_to_file;
-            $this->debugFileDescriptor = fopen($path_to_file, 'w+');
-        }
+        $this->debug = true;
+        $this->debugToFile = $path_to_file;
+        $this->debugFileDescriptor = fopen($path_to_file, 'w+');
     }
 
     /**
      * Executes request and returns instance of result object
      *
-     * @return TranzWarePaymentGatewayHTTPClientResult
+     * @return PaymentGatewayHTTPClientResult
      */
     final public function execute()
     {
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->url);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
@@ -64,31 +64,21 @@ class TranzWarePaymentGatewayHTTPClient implements TranzWarePaymentGatewayHTTPCl
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt(
-            $ch, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/xml',
-                'Content-Length: '.strlen($this->body)
-            ]
-        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/xml',
+            'Content-Length: '.strlen($this->body)
+        ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->body);
 
         if ($this->ssl) {
-            curl_setopt($ch, CURLOPT_SSLCERT, $this->ssl['cert']);
-            curl_setopt($ch, CURLOPT_SSLKEY, $this->ssl['key']);
-
-            if (isset($this->ssl['keyPass'])) {
-                curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->ssl['keyPass']);
-            }
-
-            if (isset($this->ssl['ca'])) {
-              $sslCAPath = $this->ssl['ca']['path'];
-              $sslCAFile = $this->ssl['ca']['file'];
-              curl_setopt($ch, CURLOPT_CAPATH, $sslCAPath);
-              curl_setopt($ch, CURLOPT_CAINFO, $sslCAFile);
-            }
-
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, (bool)$this->strictSSL ? 2 : 0);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, (bool)$this->strictSSL);
+            $sslCert = $this->ssl['cert'];
+            $sslkey = $this->ssl['key'];
+            $sslCertPass = $this->ssl['keyPass'];
+            curl_setopt($ch, CURLOPT_SSLCERT, $sslCert);
+            curl_setopt($ch, CURLOPT_SSLKEY, $sslkey);
+            curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $sslCertPass);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         }
 
         if ($this->debug) {
@@ -105,7 +95,7 @@ class TranzWarePaymentGatewayHTTPClient implements TranzWarePaymentGatewayHTTPCl
             fputs($this->debugFileDescriptor, "OUTPUT: \n" . var_export($output, true));
         }
 
-        return new TranzWarePaymentGatewayHTTPClientResult(
+        return new PaymentGatewayHTTPClientResult(
             $output,
             $info
         );

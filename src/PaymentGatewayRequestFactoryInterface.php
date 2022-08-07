@@ -1,25 +1,24 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway;
+namespace Codio\PaymentGateway;
 
-use \OpenPaymentSolutions\TranzWarePaymentGateway\Requests\TranzWarePaymentGatewayRequestInterface;
+use \Codio\PaymentGateway\Requests\PaymentGatewayRequestInterface;
 
 /**
- * Interface TranzWarePaymentGatewayRequestFactoryInterface
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway
+ * Interface PaymentGatewayRequestFactoryInterface
+ * @package Codio\PaymentGateway
  */
-interface TranzWarePaymentGatewayRequestFactoryInterface
+interface PaymentGatewayRequestFactoryInterface
 {
     /**
-     * TranzWarePaymentGatewayRequestFactoryInterface constructor.
+     * PaymentGatewayRequestFactoryInterface constructor.
      *
      * @param string $GATEWAY_URL
      * @param string $MERCHANT_ID
      * @param string $ON_ORDER_APPROVED_URL
      * @param string $ON_ORDER_DECLINED_URL
      * @param string $ON_ORDER_CANCELED_URL
-     * @param string $LANG (optional)
+     * @param string $LANG
      */
     public function __construct(
         $GATEWAY_URL, $MERCHANT_ID,
@@ -30,18 +29,18 @@ interface TranzWarePaymentGatewayRequestFactoryInterface
     /**
      * Sets verbose mode in requests and file to output
      *
-     * @param  string $path_to_file
+     * @param string$path_to_file
      * @return void
      */
     public function setDebugFile($path_to_file);
 
     /**
-     * @param float                                              $amount
-     * @param string                                             $currency
-     * @param string                                             $description
+     * @param float  $amount
+     * @param string $currency
+     * @param string $description
      * @param string{OrderTypes::PURCHASE, OrderTypes::PRE_AUTH} $orderType
      *
-     * @return TranzWarePaymentGatewayRequestInterface
+     * @return PaymentGatewayRequestInterface
      */
     public function createOrderRequest($amount, $currency, $description = '', $orderType = OrderTypes::PURCHASE);
 
@@ -49,7 +48,7 @@ interface TranzWarePaymentGatewayRequestFactoryInterface
      * @param string $orderId
      * @param string $sessionId
      *
-     * @return TranzWarePaymentGatewayRequestInterface
+     * @return PaymentGatewayRequestInterface
      */
     public function createOrderStatusRequest($orderId, $sessionId);
 }

@@ -1,15 +1,14 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Handlers;
+namespace Codio\PaymentGateway\Handlers;
 
 /**
  * Class that handles request from TWPG after approved/canceled/declined order creation on TWPG site
  *
- * Class TranzWarePaymentGatewayOrderCallbackHandler
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Handlers
+ * Class PaymentGatewayOrderCallbackHandler
+ * @package Codio\PaymentGateway\Handlers
  */
-class TranzWarePaymentGatewayOrderCallbackHandler implements TranzWarePaymentGatewayHandlerInterface
+class PaymentGatewayOrderCallbackHandler implements PaymentGatewayHandlerInterface
 {
     /**
      * Handles callback request and returns array of DatTime, OrderId, Amount, Currency, OrderStatus values
@@ -19,10 +18,8 @@ class TranzWarePaymentGatewayOrderCallbackHandler implements TranzWarePaymentGat
     final public function handle()
     {
         $xmlmsg = @simplexml_load_string($_REQUEST['xmlmsg']);
-        if (!$xmlmsg) { $xmlmsg = @simplexml_load_string(base64_decode($_REQUEST['xmlmsg']));
-        }
-        if (!$xmlmsg) { return null;
-        }
+        if (!$xmlmsg) $xmlmsg = @simplexml_load_string(base64_decode($_REQUEST['xmlmsg']));
+        if (!$xmlmsg) return null;
 
         $data = json_decode(
             json_encode(
@@ -31,6 +28,7 @@ class TranzWarePaymentGatewayOrderCallbackHandler implements TranzWarePaymentGat
             false
         );
         return [
+            'PAN'           => $data->PAN,
             'DateTime'      => $data->TranDateTime,
             'OrderId'       => $data->OrderID,
             'Amount'        => $data->PurchaseAmount,

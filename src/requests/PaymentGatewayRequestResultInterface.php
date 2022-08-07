@@ -1,20 +1,19 @@
 <?php
 
-namespace OpenPaymentSolutions\TranzWarePaymentGateway\Requests;
+namespace Codio\PaymentGateway\Requests;
 
 /**
- * Interface TranzWarePaymentGatewayRequestResultInterface
- *
- * @package OpenPaymentSolutions\TranzWarePaymentGateway\Requests
+ * Interface PaymentGatewayRequestResultInterface
+ * @package Codio\PaymentGateway\Requests
  */
-interface TranzWarePaymentGatewayRequestResultInterface
+interface PaymentGatewayRequestResultInterface
 {
     /**
-     * TranzWarePaymentGatewayRequestResultInterface constructor.
+     * PaymentGatewayRequestResultInterface constructor.
      *
-     * @param TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult
+     * @param PaymentGatewayHTTPClientResultInterface $HTTPClientResult
      */
-    public function __construct(TranzWarePaymentGatewayHTTPClientResultInterface $HTTPClientResult);
+    public function __construct(PaymentGatewayHTTPClientResultInterface $HTTPClientResult);
 
     /**
      * Returns http status

@@ -1,7 +1,7 @@
 {
   "name": "codio/kapitalbank-payment",
   "version": "1.0.0",
-  "description": "Library for working with TranzWare Payment Gateway",
+  "description": "Library for working with Kapitalbank Payment Gateway",
   "type": "library",
   "license": "MIT",
   "authors": [

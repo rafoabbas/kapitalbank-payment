@@ -16,4 +16,6 @@ composer require codio/kapitalbank-payment
 
 See [samples](samples) folder
 
+UPDATE: 2022-09-29
+
 ---

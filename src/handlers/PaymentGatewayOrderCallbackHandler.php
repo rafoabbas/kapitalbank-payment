@@ -33,13 +33,14 @@ class PaymentGatewayOrderCallbackHandler implements PaymentGatewayHandlerInterfa
         }
 
         return [
-            'PAN'           => $data['PAN'],
-            'DateTime'      => $data['TranDateTime'],
-            'OrderId'       => $data['OrderID'],
-            'Amount'        => $data['PurchaseAmount'],
-            'Currency'      => $data['Currency'],
-            'OrderStatus'   => $data['OrderStatus'],
-            'xmlmsg'        => $_REQUEST['xmlmsg']
+            'PAN'                    => $data['PAN'],
+            'DateTime'               => $data['TranDateTime'],
+            'OrderId'                => $data['OrderID'],
+            'OrderDescription'       => $data['OrderDescription'],
+            'Amount'                 => $data['PurchaseAmount'],
+            'Currency'               => $data['Currency'],
+            'OrderStatus'            => $data['OrderStatus'],
+            'xmlmsg'                 => $_REQUEST['xmlmsg']
         ];
     }
 }
